@@ -24,11 +24,12 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please provide a phone number"],
         minLength: [5, "password must contain atleast 5 charaters"],
         maxLength: [32, "password cannot exceed 32 characters"],
+        select: false,
     },
     role: {
         type: String, 
         required: [true, "Please provide you role"],
-        enum: ["Job Seeker", "Employeer"]
+        enum: ["Job Seeker", "Employer"]
     },
     createdAt: {
         type: Date,
