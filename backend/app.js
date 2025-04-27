@@ -8,6 +8,7 @@ import applicationRouter from './routes/application.routes.js'
 import jobRouter from './routes/job.routes.js'
 import { dbConnection } from "./database/db.js"
 import { errorMiddleware } from "./middlewares/error.js"
+import morgan from "morgan"
 
 const app = express()
 dotenv.config({path: './config/config.env'})
@@ -19,7 +20,7 @@ app.use(
     credentials : true,
 })
 );
-
+app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
