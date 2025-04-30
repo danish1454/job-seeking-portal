@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+// import 'dotenv/config';
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import fileUpload from "express-fileupload"
@@ -15,11 +16,12 @@ dotenv.config({path: './config/config.env'})
 
 app.use(
     cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    credentials : true,
-})
-);
+      origin: [process.env.FRONTEND_URL],  
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      credentials: true,
+    })
+  );
+
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(express.json())
