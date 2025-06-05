@@ -16,7 +16,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -43,90 +43,134 @@ const Register = () => {
     }
   };
 
-  if(isAuthorized){
-    return <Navigate to={"/"}/>
+  if (isAuthorized) {
+    return <Navigate to={"/"} />;
   }
 
-
   return (
-    <>
-      <section className="authPage">
-        <div className="container">
-          <div className="header">
-            <img src="JobZeelogo.png" alt="logo" />
-            <h3>Create a new account</h3>
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 p-6">
+      <div className="bg-white rounded-3xl shadow-xl flex max-w-5xl w-full overflow-hidden">
+        {/* Left side: Form */}
+        <div className="w-1/2 p-10 flex flex-col justify-center space-y-6">
+          <div className="flex items-center space-x-3">
+            <img src="/JobZeelogo.png" alt="logo" className="w-14 h-14" />
+            <h2 className="text-3xl font-bold text-gray-900">Create Your Account</h2>
           </div>
-          <form>
-            <div className="inputTag">
-              <label>Register As</label>
-              <div>
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Select Role</option>
+          <p className="text-gray-600">Register now and join our community</p>
+
+          <form onSubmit={handleRegister} className="space-y-5">
+            {/* Role Select */}
+            <div>
+              <label className="block mb-2 text-gray-700 font-semibold">Register As</label>
+              <div className="relative">
+                <select
+                  required
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="w-full appearance-none border border-gray-300 rounded-lg px-4 py-3 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="" disabled>
+                    Select Role
+                  </option>
                   <option value="Employer">Employer</option>
                   <option value="Job Seeker">Job Seeker</option>
                 </select>
-                <FaRegUser />
+                <FaRegUser className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
               </div>
             </div>
-            <div className="inputTag">
-              <label>Name</label>
-              <div>
+
+            {/* Name */}
+            <div>
+              <label className="block mb-2 text-gray-700 font-semibold">Name</label>
+              <div className="relative">
                 <input
                   type="text"
-                  placeholder="Enter your Name"
+                  required
+                  placeholder="Enter your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
-                <FaPencilAlt />
+                <FaPencilAlt className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
               </div>
             </div>
-            <div className="inputTag">
-              <label>Email Address</label>
-              <div>
+
+            {/* Email */}
+            <div>
+              <label className="block mb-2 text-gray-700 font-semibold">Email Address</label>
+              <div className="relative">
                 <input
                   type="email"
-                  placeholder="Enter your Email"
+                  required
+                  placeholder="your.email@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
-                <MdOutlineMailOutline />
+                <MdOutlineMailOutline className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
               </div>
             </div>
-            <div className="inputTag">
-              <label>Phone Number</label>
-              <div>
+
+            {/* Phone */}
+            <div>
+              <label className="block mb-2 text-gray-700 font-semibold">Phone Number</label>
+              <div className="relative">
                 <input
-                  type="number"
-                  placeholder="12345678"
+                  type="tel"
+                  required
+                  placeholder="1234567890"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
-                <FaPhoneFlip />
+                <FaPhoneFlip className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
               </div>
             </div>
-            <div className="inputTag">
-              <label>Password</label>
-              <div>
+
+            {/* Password */}
+            <div>
+              <label className="block mb-2 text-gray-700 font-semibold">Password</label>
+              <div className="relative">
                 <input
                   type="password"
+                  required
                   placeholder="Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
-                <RiLock2Fill />
+                <RiLock2Fill className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
               </div>
             </div>
-            <button type="submit" onClick={handleRegister}>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition"
+            >
               Register
             </button>
-            <Link to={"/login"}>Login Now</Link>
           </form>
+
+          <p className="text-center text-gray-600">
+            Already have an account?{" "}
+            <Link to={"/login"} className="text-indigo-600 font-semibold hover:underline">
+              Login Now
+            </Link>
+          </p>
         </div>
-        <div className="banner">
-          <img src="/register.png" alt="login" />
+
+        {/* Right side: Banner Image */}
+        <div className="w-1/2 bg-indigo-100 flex items-center justify-center">
+          <img
+            src="/register.png"
+            alt="register banner"
+            className="object-cover h-full w-full rounded-r-3xl"
+            loading="lazy"
+          />
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
